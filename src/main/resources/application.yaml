@@ -1,0 +1,21 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: 论坛系统
+  output:
+    ansi:
+      enabled: always
+  datasource:
+   url: jdbc:mysql://127.0.0.1:3306/forum_db?characterEncoding=utf8&useSSL=false
+   username: root
+   password: '219161'
+   driver-class-name: com.mysql.cj.jdbc.Driver
+logging:
+  pattern:
+    dateformat: MM-dd HH:mm:ss
+  level:
+    root: info
+    example: debug
+  file:
+    path: D:/log/forum_system  #日志保存的路径

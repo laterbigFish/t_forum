@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.forum.common.dao.ArticleMapper">
+  <resultMap id="BaseResultMap" type="com.example.forum.common.model.Article">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="boardld" jdbcType="BIGINT" property="boardld" />
+    <result column="userId" jdbcType="BIGINT" property="userId" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="visitCount" jdbcType="INTEGER" property="visitCount" />
+    <result column="replyCount" jdbcType="INTEGER" property="replyCount" />
+    <result column="likeCount" jdbcType="INTEGER" property="likeCount" />
+    <result column="state" jdbcType="TINYINT" property="state" />
+    <result column="deleteState" jdbcType="TINYINT" property="deleteState" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="updateTime" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="content" jdbcType="LONGVARCHAR" property="content" />
+  </resultMap>
+  <!-- useGeneratedKeys = true -->
+  <!-- keyProperty = 主键字段-->
+  <!-- 当插⼊⼀条数据后，可以通过user.getId()获取到⾃动⽣成的Id值，如果⽅法中需要⽴即获取
+  Id值，加⼊这个配置 -->
+  <insert id="insert" parameterType="com.example.forum.common.model.Article" useGeneratedKeys="true" keyProperty="id">
+    insert into t_article (id, boardld, userId, 
+      title, visitCount, replyCount, 
+      likeCount, state, deleteState, 
+      createTime, updateTime, content
+      )
+    values (#{id,jdbcType=BIGINT}, #{boardld,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, 
+      #{title,jdbcType=VARCHAR}, #{visitCount,jdbcType=INTEGER}, #{replyCount,jdbcType=INTEGER}, 
+      #{likeCount,jdbcType=INTEGER}, #{state,jdbcType=TINYINT}, #{deleteState,jdbcType=TINYINT}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{content,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.example.forum.common.model.Article">
+    update t_article
+    set boardld = #{boardld,jdbcType=BIGINT},
+      userId = #{userId,jdbcType=BIGINT},
+      title = #{title,jdbcType=VARCHAR},
+      visitCount = #{visitCount,jdbcType=INTEGER},
+      replyCount = #{replyCount,jdbcType=INTEGER},
+      likeCount = #{likeCount,jdbcType=INTEGER},
+      state = #{state,jdbcType=TINYINT},
+      deleteState = #{deleteState,jdbcType=TINYINT},
+      createTime = #{createTime,jdbcType=TIMESTAMP},
+      updateTime = #{updateTime,jdbcType=TIMESTAMP},
+      content = #{content,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select id, boardld, userId, title, visitCount, replyCount, likeCount, state, deleteState, 
+    createTime, updateTime, content
+    from t_article
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, boardld, userId, title, visitCount, replyCount, likeCount, state, deleteState, 
+    createTime, updateTime, content
+    from t_article
+  </select>
+</mapper>

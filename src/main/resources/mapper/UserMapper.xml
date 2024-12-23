@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.forum.common.dao.UserMapper">
+  <resultMap id="BaseResultMap" type="com.example.forum.common.model.User">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="nickname" jdbcType="VARCHAR" property="nickname" />
+    <result column="phoneNum" jdbcType="VARCHAR" property="phoneNum" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="gender" jdbcType="TINYINT" property="gender" />
+    <result column="salt" jdbcType="VARCHAR" property="salt" />
+    <result column="avatarUrl" jdbcType="VARCHAR" property="avatarUrl" />
+    <result column="articleCount" jdbcType="INTEGER" property="articleCount" />
+    <result column="isAdmin" jdbcType="TINYINT" property="isAdmin" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="state" jdbcType="TINYINT" property="state" />
+    <result column="deleteState" jdbcType="TINYINT" property="deleteState" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="updateTime" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <insert id="insert" parameterType="com.example.forum.common.model.User" useGeneratedKeys="true" keyProperty="id">
+    insert into t_user (id, username, password, 
+      nickname, phoneNum, email, 
+      gender, salt, avatarUrl, 
+      articleCount, isAdmin, remark, 
+      state, deleteState, createTime, 
+      updateTime)
+    values (#{id,jdbcType=BIGINT}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{nickname,jdbcType=VARCHAR}, #{phoneNum,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
+      #{gender,jdbcType=TINYINT}, #{salt,jdbcType=VARCHAR}, #{avatarUrl,jdbcType=VARCHAR}, 
+      #{articleCount,jdbcType=INTEGER}, #{isAdmin,jdbcType=TINYINT}, #{remark,jdbcType=VARCHAR}, 
+      #{state,jdbcType=TINYINT}, #{deleteState,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.example.forum.common.model.User">
+    update t_user
+    set username = #{username,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      nickname = #{nickname,jdbcType=VARCHAR},
+      phoneNum = #{phoneNum,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      gender = #{gender,jdbcType=TINYINT},
+      salt = #{salt,jdbcType=VARCHAR},
+      avatarUrl = #{avatarUrl,jdbcType=VARCHAR},
+      articleCount = #{articleCount,jdbcType=INTEGER},
+      isAdmin = #{isAdmin,jdbcType=TINYINT},
+      remark = #{remark,jdbcType=VARCHAR},
+      state = #{state,jdbcType=TINYINT},
+      deleteState = #{deleteState,jdbcType=TINYINT},
+      createTime = #{createTime,jdbcType=TIMESTAMP},
+      updateTime = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select id, username, password, nickname, phoneNum, email, gender, salt, avatarUrl, 
+    articleCount, isAdmin, remark, state, deleteState, createTime, updateTime
+    from t_user
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, username, password, nickname, phoneNum, email, gender, salt, avatarUrl, 
+    articleCount, isAdmin, remark, state, deleteState, createTime, updateTime
+    from t_user
+  </select>
+</mapper>

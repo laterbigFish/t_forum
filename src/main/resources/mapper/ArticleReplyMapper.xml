@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.forum.common.dao.ArticleReplyMapper">
+  <resultMap id="BaseResultMap" type="com.example.forum.common.model.ArticleReply">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="articleld" jdbcType="BIGINT" property="articleld" />
+    <result column="postUserId" jdbcType="BIGINT" property="postUserId" />
+    <result column="replyId" jdbcType="BIGINT" property="replyId" />
+    <result column="replyUserId" jdbcType="BIGINT" property="replyUserId" />
+    <result column="content" jdbcType="VARCHAR" property="content" />
+    <result column="likeCount" jdbcType="INTEGER" property="likeCount" />
+    <result column="state" jdbcType="TINYINT" property="state" />
+    <result column="deleteState" jdbcType="TINYINT" property="deleteState" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="updateTime" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <insert id="insert" parameterType="com.example.forum.common.model.ArticleReply" useGeneratedKeys="true" keyProperty="id">
+    insert into t_article_reply (id, articleld, postUserId, 
+      replyId, replyUserId, content, 
+      likeCount, state, deleteState, 
+      createTime, updateTime)
+    values (#{id,jdbcType=BIGINT}, #{articleld,jdbcType=BIGINT}, #{postUserId,jdbcType=BIGINT}, 
+      #{replyId,jdbcType=BIGINT}, #{replyUserId,jdbcType=BIGINT}, #{content,jdbcType=VARCHAR}, 
+      #{likeCount,jdbcType=INTEGER}, #{state,jdbcType=TINYINT}, #{deleteState,jdbcType=TINYINT}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.example.forum.common.model.ArticleReply">
+    update t_article_reply
+    set articleld = #{articleld,jdbcType=BIGINT},
+      postUserId = #{postUserId,jdbcType=BIGINT},
+      replyId = #{replyId,jdbcType=BIGINT},
+      replyUserId = #{replyUserId,jdbcType=BIGINT},
+      content = #{content,jdbcType=VARCHAR},
+      likeCount = #{likeCount,jdbcType=INTEGER},
+      state = #{state,jdbcType=TINYINT},
+      deleteState = #{deleteState,jdbcType=TINYINT},
+      createTime = #{createTime,jdbcType=TIMESTAMP},
+      updateTime = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select id, articleld, postUserId, replyId, replyUserId, content, likeCount, state, 
+    deleteState, createTime, updateTime
+    from t_article_reply
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, articleld, postUserId, replyId, replyUserId, content, likeCount, state, 
+    deleteState, createTime, updateTime
+    from t_article_reply
+  </select>
+</mapper>

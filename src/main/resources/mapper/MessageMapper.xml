@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.forum.common.dao.MessageMapper">
+  <resultMap id="BaseResultMap" type="com.example.forum.common.model.Message">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="postUserId" jdbcType="BIGINT" property="postUserId" />
+    <result column="receiveUserId" jdbcType="BIGINT" property="receiveUserId" />
+    <result column="content" jdbcType="VARCHAR" property="content" />
+    <result column="state" jdbcType="TINYINT" property="state" />
+    <result column="deleteState" jdbcType="TINYINT" property="deleteState" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="updateTime" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <insert id="insert" parameterType="com.example.forum.common.model.Message" useGeneratedKeys="true" keyProperty="id">
+    insert into t_message (id, postUserId, receiveUserId, 
+      content, state, deleteState, 
+      createTime, updateTime)
+    values (#{id,jdbcType=BIGINT}, #{postUserId,jdbcType=BIGINT}, #{receiveUserId,jdbcType=BIGINT}, 
+      #{content,jdbcType=VARCHAR}, #{state,jdbcType=TINYINT}, #{deleteState,jdbcType=TINYINT}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.example.forum.common.model.Message">
+    update t_message
+    set postUserId = #{postUserId,jdbcType=BIGINT},
+      receiveUserId = #{receiveUserId,jdbcType=BIGINT},
+      content = #{content,jdbcType=VARCHAR},
+      state = #{state,jdbcType=TINYINT},
+      deleteState = #{deleteState,jdbcType=TINYINT},
+      createTime = #{createTime,jdbcType=TIMESTAMP},
+      updateTime = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select id, postUserId, receiveUserId, content, state, deleteState, createTime, updateTime
+    from t_message
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, postUserId, receiveUserId, content, state, deleteState, createTime, updateTime
+    from t_message
+  </select>
+</mapper>

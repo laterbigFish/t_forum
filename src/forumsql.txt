@@ -1,0 +1,81 @@
+﻿DROP database if EXISTS forum_db;
+create database forum_db CHARSET utf8mb4 COLLATE utf8mb4_general_ci;
+
+use forum_db;
+DROP TABLE IF EXISTS t_user;
+
+CREATE table t_user(
+ id BIGINT PRIMARY KEY AUTO_INCREMENT COMMENT '编号，自增主键',
+ username VARCHAR(20) NOT NULL UNIQUE COMMENT '用户名，唯一',
+ password VARCHAR(32) NOT NULL UNIQUE COMMENT '加密后的密码',
+ nickname VARCHAR(50) NOT NULL COMMENT '昵称',
+ phoneNum VARCHAR(20)  COMMENT '手机号',
+ email varchar(50) COMMENT '电子邮箱',
+ gender TINYINT NOT NULL DEFAULT 2 COMMENT'性别 0 女 1 男 2 保密',
+ salt varchar(32) NOT NULL COMMENT '为密码加盐',
+ avatarUrl VARCHAR(255) COMMENT '用户头像路径',
+ articleCount INT NOT NULL DEFAULT 0 COMMENT '发布数量',
+ isAdmin TINYINT  DEFAULT 0 NOT NULL COMMENT '是否管理员 0 否 1 是',
+ remark VARCHAR(1000) COMMENT '自我介绍',
+ state TINYINT NOT NULL DEFAULT 0 COMMENT '状态 0 正常 1 禁言',
+ deleteState TINYINT NOT NULL DEFAULT 0  COMMENT '是否删除 0 否 1 是',
+ createTime DATETIME NOT NULL COMMENT '创建时间',
+ updateTime DATETIME NOT NULL COMMENT '更新时间'
+);
+DROP TABLE IF EXISTS t_board;
+
+CREATE TABLE t_board(
+ id BIGINT PRIMARY KEY AUTO_INCREMENT COMMENT '编号，自增主键',
+ name VARCHAR(50) NOT NULL COMMENT '板块名',
+ articleCount INT NOT NULL DEFAULT 0  COMMENT '数量',
+ sort INT NOT NULL DEFAULT 0 COMMENT'排序优先级，升序',
+  state TINYINT NOT NULL DEFAULT 0 COMMENT '状态 0 正常 1 禁用',
+ deleteState TINYINT NOT NULL DEFAULT 0  COMMENT '是否删除 0 否 1 是',
+ createTime DATETIME NOT NULL COMMENT '创建时间',
+ updateTime DATETIME NOT NULL COMMENT '更新时间'
+);
+
+DROP table IF EXISTS t_article;
+
+CREATE TABLE t_article(
+    id BIGINT PRIMARY KEY AUTO_INCREMENT COMMENT '编号，自增主键',
+   boardld BIGINT NOT NULL COMMENT '关联板块号',
+   userId BIGINT NOT NULL COMMENT '发帖人，关联用户编号',
+   title VARCHAR(100) NOT NULL COMMENT '帖子标题',
+   content TEXT NOT NULL COMMENT '帖子正文',
+   visitCount INT NOT NULL DEFAULT 0 COMMENT '访问量',
+   replyCount INT NOT NULL DEFAULT 0 COMMENT '回复量',
+   likeCount INT NOT NULL DEFAULT 0 COMMENT '点赞数',
+  state TINYINT NOT NULL DEFAULT 0 COMMENT '状态 0 正常 1 禁用',
+ deleteState TINYINT NOT NULL DEFAULT 0 COMMENT'是否删除 0 否 1 是',
+ createTime DATETIME NOT NULL COMMENT '创建时间',
+ updateTime DATETIME NOT NULL COMMENT '更新时间'
+);
+
+DROP TABLE IF EXISTS t_article_reply;
+CREATE TABLE t_article_reply(
+ id BIGINT PRIMARY KEY AUTO_INCREMENT COMMENT'编号，自增主键',
+ articleld BIGINT NOT NULL COMMENT'关联帖子编号',
+ postUserId BIGINT NOT NULL COMMENT '楼主用户，关联用户编号',
+ replyId BIGINT COMMENT '关联回复编号，支持楼中楼',
+ replyUserId BIGINT  COMMENT '楼主下的回复用户编号，支持楼中楼',
+ content VARCHAR(500) NOT NULL  COMMENT '回复内容',
+ likeCount INT NOT NULL DEFAULT 0 COMMENT '点赞数',
+ state TINYINT NOT NULL DEFAULT 0 COMMENT '状态 0 正常 1 禁用',
+ deleteState TINYINT NOT NULL DEFAULT 0  COMMENT '是否删除 0 否 1 是',
+ createTime DATETIME NOT NULL COMMENT '创建时间',
+ updateTime DATETIME NOT NULL COMMENT '更新时间'
+);
+DROP TABLE IF EXISTS  t_message;
+
+CREATE TABLE  t_message(
+  id BIGINT PRIMARY KEY AUTO_INCREMENT COMMENT '编号，自增主键',
+  postUserId BIGINT NOT NULL COMMENT '发送者，关联用户编号',
+  receiveUserId BIGINT NOT NULL COMMENT '接受者，关联用户编号',
+  content VARCHAR(250) NOT NULL  COMMENT '内容',
+ state TINYINT NOT NULL DEFAULT 0 COMMENT '状态 0 正常 1 禁用',
+ deleteState TINYINT NOT NULL DEFAULT 0  COMMENT '是否删除 0 否 1 是',
+ createTime DATETIME NOT NULL COMMENT '创建时间',
+ updateTime DATETIME NOT NULL COMMENT '更新时间'
+
+);

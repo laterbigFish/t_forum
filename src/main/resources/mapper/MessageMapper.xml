@@ -11,6 +11,9 @@
     <result column="createTime" jdbcType="TIMESTAMP" property="createTime" />
     <result column="updateTime" jdbcType="TIMESTAMP" property="updateTime" />
   </resultMap>
+  <sql id="Base_Column_List">
+    id, postUserId, receiveUserId, content, state, deleteState, createTime, updateTime
+  </sql>
   <insert id="insert" parameterType="com.example.forum.common.model.Message" useGeneratedKeys="true" keyProperty="id">
     insert into t_message (id, postUserId, receiveUserId, 
       content, state, deleteState, 

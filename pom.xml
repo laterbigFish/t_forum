@@ -5,6 +5,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
+<!--        <version>2.7.3</version>-->
         <version>3.3.6</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
@@ -27,19 +28,36 @@
         <url/>
     </scm>
     <properties>
-        <java.version>17</java.version>
+
+<!--        <java.version>18</java.version>-->
+        <springfox-boot-starter.version>3.0.0</springfox-boot-starter.version>
     </properties>
     <dependencies>
+<!--        &lt;!&ndash; API⽂档⽣成，基于swagger2 &ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>io.springfox</groupId>-->
+<!--            <artifactId>springfox-boot-starter</artifactId>-->
+<!--            <version>${springfox-boot-starter.version}</version>-->
+<!--        </dependency>-->
+<!--        &lt;!&ndash; SpringBoot健康监控 &ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.boot</groupId>-->
+<!--            <artifactId>spring-boot-starter-actuator</artifactId>-->
+<!--        </dependency>-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-
         <dependency>
-            <groupId>com.mysql</groupId>
-            <artifactId>mysql-connector-j</artifactId>
-            <scope>runtime</scope>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.33</version> <!-- 确保使用适当的版本 -->
         </dependency>
+<!--        <dependency>-->
+<!--            <groupId>com.mysql</groupId>-->
+<!--            <artifactId>mysql-connector-j</artifactId>-->
+<!--            <scope>runtime</scope>-->
+<!--        </dependency>-->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
@@ -76,10 +94,15 @@
 
         <dependency>
             <groupId>io.jsonwebtoken</groupId>
-            <artifactId>jjwt-jackson</artifactId> <!-- or jjwt-gson if Gson is
-preferred -->
+            <artifactId>jjwt-jackson</artifactId> <!-- or jjwt-gson if Gson ispreferred -->
             <version>0.11.5</version>
             <scope>runtime</scope>
+        </dependency>
+
+        <!-- 编码解码加密⼯具包 md5进行加密 -->
+        <dependency>
+            <groupId>commons-codec</groupId>
+            <artifactId>commons-codec</artifactId>
         </dependency>
 
     </dependencies>

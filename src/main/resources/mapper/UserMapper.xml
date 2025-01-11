@@ -19,6 +19,10 @@
     <result column="createTime" jdbcType="TIMESTAMP" property="createTime" />
     <result column="updateTime" jdbcType="TIMESTAMP" property="updateTime" />
   </resultMap>
+  <sql id="Base_Column_List">
+    id, username, password, nickname, phoneNum, email, gender, salt, avatarUrl, articleCount,
+    isAdmin, remark, state, deleteState, createTime, updateTime
+  </sql>
   <insert id="insert" parameterType="com.example.forum.common.model.User" useGeneratedKeys="true" keyProperty="id">
     insert into t_user (id, username, password, 
       nickname, phoneNum, email, 
@@ -58,9 +62,11 @@
     from t_user
     where id = #{id,jdbcType=BIGINT}
   </select>
+
   <select id="selectAll" resultMap="BaseResultMap">
     select id, username, password, nickname, phoneNum, email, gender, salt, avatarUrl, 
     articleCount, isAdmin, remark, state, deleteState, createTime, updateTime
     from t_user
   </select>
+
 </mapper>

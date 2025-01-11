@@ -14,6 +14,10 @@
     <result column="createTime" jdbcType="TIMESTAMP" property="createTime" />
     <result column="updateTime" jdbcType="TIMESTAMP" property="updateTime" />
   </resultMap>
+  <sql id="Base_Column_List">
+    id, articleId, postUserId, replyId, replyUserId, content, likeCount, state, deleteState,
+    createTime, updateTime
+  </sql>
   <insert id="insert" parameterType="com.example.forum.common.model.ArticleReply" useGeneratedKeys="true" keyProperty="id">
     insert into t_article_reply (id, articleld, postUserId, 
       replyId, replyUserId, content, 

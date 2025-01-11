@@ -47,7 +47,29 @@ public class User {
         return username;
     }
 
-    public void setUsername(String username) {
+    @Override
+    public String toString(){
+        return "User{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", nickname='" + nickname + '\'' +
+                ", phoneNum='" + phoneNum + '\'' +
+                ", email='" + email + '\'' +
+                ", gender=" + gender +
+                ", salt='" + salt + '\'' +
+                ", avatarUrl='" + avatarUrl + '\'' +
+                ", articleCount=" + articleCount +
+                ", isAdmin=" + isAdmin +
+                ", remark='" + remark + '\'' +
+                ", state=" + state +
+                ", deleteState=" + deleteState +
+                ", createTime=" + createTime +
+                ", updateTime=" + updateTime +
+                '}';
+    }
+
+    public void setUsername( String username) {
         this.username = username == null ? null : username.trim();
     }
 

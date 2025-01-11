@@ -19,6 +19,13 @@
   <!-- keyProperty = 主键字段-->
   <!-- 当插⼊⼀条数据后，可以通过user.getId()获取到⾃动⽣成的Id值，如果⽅法中需要⽴即获取
   Id值，加⼊这个配置 -->
+  <sql id="Base_Column_List">
+    id, boardId, userId, title, visitCount, replyCount, likeCount, state, deleteState,
+    createTime, updateTime
+  </sql>
+  <sql id="Blob_Column_List">
+    content
+  </sql>
   <insert id="insert" parameterType="com.example.forum.common.model.Article" useGeneratedKeys="true" keyProperty="id">
     insert into t_article (id, boardld, userId, 
       title, visitCount, replyCount, 

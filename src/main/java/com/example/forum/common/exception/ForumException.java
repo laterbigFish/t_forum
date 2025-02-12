@@ -1,8 +1,9 @@
 package com.example.forum.common.exception;
 
 import com.example.forum.common.Result;
-import org.springframework.web.bind.annotation.ControllerAdvice;
+import lombok.Getter;
 
+@Getter
 public class ForumException extends RuntimeException{
     //在异常中保存错误信息
 //    private static final long serialVersionUID = -3533806916645793660L;
@@ -28,10 +29,6 @@ public class ForumException extends RuntimeException{
 
     protected ForumException( String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace ){
         super(message, cause, enableSuppression, writableStackTrace);
-    }
-
-    public Result getErrorResult(){
-        return errorResult;
     }
 
     public ForumException(){

@@ -19,6 +19,16 @@ public class Message {
 
     private Date updateTime;
 
+    private User postUser;
+
+    public User getPostUser(){
+        return postUser;
+    }
+
+    public void setPostUser( User postUser ){
+        this.postUser = postUser;
+    }
+
     public Long getId() {
         return id;
     }

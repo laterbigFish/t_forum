@@ -27,6 +27,57 @@ public class Article {
 
     private String content;
 
+    //判断是否是用户本人
+    private Boolean Own;
+
+    public Boolean getOwn(){
+        return Own;
+    }
+
+    public void setOwn( Boolean own ){
+        Own = own;
+    }
+
+    //添加一个关联对象
+    private User user;
+
+    private Board board;
+
+    public Board getBoard(){
+        return board;
+    }
+
+    public void setBoard( Board board ){
+        this.board = board;
+    }
+
+    public User getUser(){
+        return user;
+    }
+
+    public void setUser( User user ){
+        this.user = user;
+    }
+
+    @Override
+    public String toString(){
+        return "Article{" +
+                "id=" + id +
+                ", boardld=" + boardld +
+                ", userId=" + userId +
+                ", title='" + title + '\'' +
+                ", visitCount=" + visitCount +
+                ", replyCount=" + replyCount +
+                ", likeCount=" + likeCount +
+                ", state=" + state +
+                ", deleteState=" + deleteState +
+                ", createTime=" + createTime +
+                ", updateTime=" + updateTime +
+                ", content='" + content + '\'' +
+                ", user=" + user +
+                '}';
+    }
+
     public Long getId() {
         return id;
     }

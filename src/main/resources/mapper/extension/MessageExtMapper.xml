@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.forum.common.dao.MessageMapper">
+<!--    表关联-->
+   <resultMap id="AllInfoResultMap" type="com.example.forum.common.model.Message" extends="BaseResultMap">
+       <association property="postUser" resultMap="com.example.forum.common.dao.UserMapper.BaseResultMap"
+                    columnPrefix="u_"/>
+   </resultMap>
+    <select id="selectByReceiveUserId"  parameterType="java.lang.Long" resultType="java.lang.Integer">
+
+        select COUNT(*) from t_message
+        WHERE state = 0
+          AND deleteState = 0
+          AND receiveUserId=#{receiveUserId};
+
+    </select>
+
+    <select id="selectAllByReceiveUserId" resultMap="AllInfoResultMap" parameterType="java.lang.Long" resultType="arraylist">
+        select
+            m.id,m.postUserId,m.receiveUserId,m.content,m.state,m.createTime,m.updateTime,
+            u.id as u_id,
+            u.nickname as u_nickname,
+            u.phoneNum as u_phoneNum,
+            u.email as u_email,
+            u.gender as u_gender,
+            u.avatarUrl as u_avatarUrl
+        from t_message m ,t_user u
+        WHERE
+            m.postUserId = u.id AND
+            m.receiveUserId = #{receiveUserId} AND
+            m.deleteState = 0
+        ORDER BY m.createTime DESC ,m.state asc;
+
+    </select>
+</mapper>

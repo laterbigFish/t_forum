@@ -8,7 +8,7 @@ import lombok.Data;
 public class Result<T> {
     //使得如果为空也可以在前端显示出来
 
-    @JsonInclude(JsonInclude.Include.ALWAYS)
+    @JsonInclude(JsonInclude.Include.ALWAYS)  //表示无论任何情况都参与JSON序列化
     private long code;
 
     @JsonInclude(JsonInclude.Include.ALWAYS)

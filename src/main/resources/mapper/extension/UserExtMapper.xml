@@ -18,4 +18,5 @@
         and
         username = #{username,jdbcType=VARCHAR}
     </select>
+
 </mapper>

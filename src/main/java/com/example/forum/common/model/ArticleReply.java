@@ -2,19 +2,21 @@ package com.example.forum.common.model;
 
 import java.util.Date;
 
+
 public class ArticleReply {
     private Long id;
-
-    private Long articleld;
-
+     //发布帖子的id
+    private Long articleId;
+    //评论人的id
     private Long postUserId;
 
+    //下面两个是楼中楼功能  在这里忽略
     private Long replyId;
 
     private Long replyUserId;
 
     private String content;
-
+    // 忽略
     private Integer likeCount;
 
     private Byte state;
@@ -25,20 +27,49 @@ public class ArticleReply {
 
     private Date updateTime;
 
+    //关联对象 帖子回复的发送者
+    private User user;
+
+    public Long getArticleId(){
+        return articleId;
+    }
+
+    public void setArticleId( Long articleId ){
+        this.articleId = articleId;
+    }
+
+    public User getUser(){
+        return user;
+    }
+
+    public void setUser( User user ){
+        this.user = user;
+    }
+
+    @Override
+    public String toString(){
+        return "ArticleReply{" +
+                "id=" + id +
+                ", articleId=" + articleId +
+                ", postUserId=" + postUserId +
+                ", replyId=" + replyId +
+                ", replyUserId=" + replyUserId +
+                ", content='" + content + '\'' +
+                ", likeCount=" + likeCount +
+                ", state=" + state +
+                ", deleteState=" + deleteState +
+                ", createTime=" + createTime +
+                ", updateTime=" + updateTime +
+                ", user=" + user +
+                '}';
+    }
+
     public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Long getArticleld() {
-        return articleld;
-    }
-
-    public void setArticleld(Long articleld) {
-        this.articleld = articleld;
     }
 
     public Long getPostUserId() {

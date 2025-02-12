@@ -1,24 +1,35 @@
 package com.example.forum.common.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 import java.util.Date;
 
 public class User {
     private Long id;
 
     private String username;
-
+   @JsonIgnore
     private String password;
+
+    @JsonInclude(JsonInclude.Include.ALWAYS)
 
     private String nickname;
 
+//    @JsonInclude(JsonInclude.Include.ALWAYS)
     private String phoneNum;
+
+//    @JsonInclude(JsonInclude.Include.ALWAYS)
 
     private String email;
 
+//    @JsonInclude(JsonInclude.Include.ALWAYS)
     private Byte gender;
 
+    @JsonIgnore      //表示不参与序列化
     private String salt;
 
+    @JsonInclude(JsonInclude.Include.ALWAYS) //强制参加Json序列化 可以抵消yaml中低定义
     private String avatarUrl;
 
     private Integer articleCount;
@@ -29,9 +40,10 @@ public class User {
 
     private Byte state;
 
+    @JsonIgnore
     private Byte deleteState;
 
-    private Date createTime;
+    private Date createTime;    //将两个时间的格式进行一些改变
 
     private Date updateTime;
 

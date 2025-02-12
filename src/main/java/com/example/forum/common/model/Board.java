@@ -19,6 +19,20 @@ public class Board {
 
     private Date updateTime;
 
+    @Override
+    public String toString(){
+        return "Board{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", articleCount=" + articleCount +
+                ", sort=" + sort +
+                ", state=" + state +
+                ", deleteState=" + deleteState +
+                ", createTime=" + createTime +
+                ", updateTime=" + updateTime +
+                '}';
+    }
+
     public Long getId() {
         return id;
     }

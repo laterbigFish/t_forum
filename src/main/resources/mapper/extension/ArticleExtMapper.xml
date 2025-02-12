@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.forum.common.dao.ArticleMapper">
+
+<!--    自定义结果集的映射    -->
+    <resultMap extends="ResultMapWithBLOBs" id="AllInfoResultMap" type="com.example.forum.common.model.Article">
+<!--        关联用户的一种映射-->
+        <association property="user" resultMap="com.example.forum.common.dao.UserMapper.BaseResultMap"
+      columnPrefix="u_" />
+        <association property="board" resultMap="com.example.forum.common.dao.BoardMapper.BaseResultMap"
+        columnPrefix="b_" />
+    </resultMap>
+
+
+<!--    查询所有未被删除的帖子 不包含 content   resultMap 指定自定义的关联关系-->
+    <select id="selectAllByUser"  resultMap="AllInfoResultMap">
+        SELECT
+            u.id as u_id,
+            u.avatarUrl as u_avatarUrl,
+            u.nickname as u_nickname,
+            a.id,
+            a.boardld,
+            a.userId,
+            a.title,
+            a.visitCount,
+            a.replyCount,
+            a.likeCount,
+            a.state,
+            a.createTime,
+            a.updateTime
+        from t_article a,t_user u
+        where a.userId = u.id AND a.deleteState = 0
+        ORDER BY a.createTime DESC;
+    </select>
+<!--  根据板块id进行查询-->
+    <select id="selectAllByBoardId" resultMap="AllInfoResultMap" parameterType="java.lang.Long">
+        SELECT
+            u.id as u_id,
+            u.avatarUrl as u_avatarUrl,
+            u.nickname as u_nickname,
+            a.id,
+            a.boardld,
+            a.userId,
+            a.title,
+            a.visitCount,
+            a.replyCount,
+            a.likeCount,
+            a.state,
+            a.createTime,
+            a.updateTime
+        from t_article a,t_user u
+        where a.userId = u.id AND a.deleteState = 0 AND a.boardld = #{boardId}
+        ORDER BY a.createTime DESC;
+    </select>
+    <select id="selectDetailById" resultMap="AllInfoResultMap" parameterType="java.lang.Long">
+        SELECT
+            u.id as u_id,
+            u.avatarUrl as u_avatarUrl,
+            u.nickname as u_nickname,
+            u.gender as u_gender,
+            u.isAdmin as u_idAdmin,
+            u.state as u_state,
+            u.deleteState as u_deleteState,
+            b.id as b_id,
+            b.state as b_state,
+            b.name as b_name,
+            b.deleteState as b_deleteState,
+            a.id,
+            a.boardld,
+            a.userId,
+            a.title,
+            a.content,
+            a.visitCount,
+            a.replyCount,
+            a.likeCount,
+            a.state,
+            a.createTime,
+            a.updateTime
+        from t_article a,t_user u ,t_board b
+        where a.userId = u.id AND a.deleteState = 0 AND a.id = #{id} AND a.boardld = b.id;
+    </select>
+<!--    根据用户id查询帖子-->
+    <select id="selectByUserId" resultMap="AllInfoResultMap" parameterType="java.lang.Long">
+        SELECT
+            b.id as b_id,
+            b.name as b_name,
+            a.id,
+            a.boardld,
+            a.userId,
+            a.title,
+            a.content,
+            a.visitCount,
+            a.replyCount,
+            a.likeCount,
+            a.state,
+            a.createTime,
+            a.updateTime
+        FROM t_article a,t_board b WHERE a.boardld=b.id AND a.deleteState=0 AND a.userId= #{userId}
+        ORDER BY a.createTime DESC
+    </select>
+</mapper>

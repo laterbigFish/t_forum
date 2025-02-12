@@ -14,4 +14,6 @@ public interface ArticleReplyMapper {
     List<ArticleReply> selectAll();
 
     int updateByPrimaryKey(ArticleReply record);
+
+    List<ArticleReply> selectByArticleId(Long articleId);
 }

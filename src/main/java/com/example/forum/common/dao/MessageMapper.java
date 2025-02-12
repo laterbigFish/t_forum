@@ -14,4 +14,8 @@ public interface MessageMapper {
     List<Message> selectAll();
 
     int updateByPrimaryKey(Message record);
+
+    int selectByReceiveUserId(Long receiveUserId);
+
+    List<Message> selectAllByReceiveUserId(Long receiveUserId);
 }

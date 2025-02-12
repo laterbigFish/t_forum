@@ -1,5 +1,7 @@
 package com.example.forum.common.utils.encryption;
 
+import org.apache.commons.codec.digest.DigestUtils;
+
 public class DigestEncryption {
 
     //使用apche的依赖实现md5加密
@@ -10,7 +12,7 @@ public class DigestEncryption {
      * @return
      */
     public  static  String md5(String Password){
-        return org.apache.commons.codec.digest.DigestUtils.md2Hex(Password);   //发挥进行加密后的原文
+        return  DigestUtils.md2Hex(Password);
     }
 
     /**

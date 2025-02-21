@@ -1,6 +1,5 @@
 package com.example.forum.service.impl;
 
-import com.example.forum.common.dao.ArticleReplyMapper;
 import com.example.forum.common.model.ArticleReply;
 import com.example.forum.service.IArticleReplyService;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -14,15 +13,14 @@ import java.util.List;
 @SpringBootTest
 class ArticleReplyServiceImplTest {
     @Resource
-    private ArticleReplyMapper articleReplyMapper;
-    @Resource
     private IArticleReplyService articleReplyService;
     @Resource
     private ObjectMapper objectMapper;
     @Test
     void create(){
         ArticleReply articleReply = new ArticleReply();
-        articleReply.setArticleId(1L);;
+
+        articleReply.setArticleId(1L);
         articleReply.setContent("现价的帖子2");
         articleReply.setPostUserId(1L);
         articleReplyService.create(articleReply);
@@ -34,4 +32,6 @@ class ArticleReplyServiceImplTest {
         List<ArticleReply> listResult = articleReplyService.selectByArticleId(1L);
         System.out.println(objectMapper.writeValueAsString(listResult));
     }
+
+
 }

@@ -39,7 +39,7 @@ DROP table IF EXISTS t_article;
 
 CREATE TABLE t_article(
     id BIGINT PRIMARY KEY AUTO_INCREMENT COMMENT '编号，自增主键',
-   boardld BIGINT NOT NULL COMMENT '关联板块号',
+   boardId BIGINT NOT NULL COMMENT '关联板块号',
    userId BIGINT NOT NULL COMMENT '发帖人，关联用户编号',
    title VARCHAR(100) NOT NULL COMMENT '帖子标题',
    content TEXT NOT NULL COMMENT '帖子正文',
@@ -79,3 +79,12 @@ CREATE TABLE  t_message(
  updateTime DATETIME NOT NULL COMMENT '更新时间'
 
 );
+INSERT INTO `t_board` (`id`, `name`, `articleCount`, `sort`, `state`, `deleteState`, `createTime`, `updateTime`) VALUES (1, 'Java', 0, 1, 0, 0, '2023-01-14 19:02:18', '2023-01-14 19:02:18');
+INSERT INTO `t_board` (`id`, `name`, `articleCount`, `sort`, `state`, `deleteState`, `createTime`, `updateTime`) VALUES (2, 'C++', 0, 2, 0, 0, '2023-01-14 19:02:41', '2023-01-14 19:02:41');
+INSERT INTO `t_board` (`id`, `name`, `articleCount`, `sort`, `state`, `deleteState`, `createTime`, `updateTime`) VALUES (3, '前端技术', 0, 3, 0, 0, '2023-01-14 19:02:52', '2023-01-14 19:02:52');
+INSERT INTO `t_board` (`id`, `name`, `articleCount`, `sort`, `state`, `deleteState`, `createTime`, `updateTime`) VALUES (4, 'MySQL', 0, 4, 0, 0, '2023-01-14 19:03:02', '2023-01-14 19:03:02');
+INSERT INTO `t_board` (`id`, `name`, `articleCount`, `sort`, `state`, `deleteState`, `createTime`, `updateTime`) VALUES (5, '面试宝典', 0, 5, 0, 0, '2023-01-14 19:03:24', '2023-01-14 19:03:24');
+INSERT INTO `t_board` (`id`, `name`, `articleCount`, `sort`, `state`, `deleteState`, `createTime`, `updateTime`) VALUES (6, '经验分享', 0, 6, 0, 0, '2023-01-14 19:03:48', '2023-01-14 19:03:48');
+INSERT INTO `t_board` (`id`, `name`, `articleCount`, `sort`, `state`, `deleteState`, `createTime`, `updateTime`) VALUES (7, '招聘信息', 0, 7, 0, 0, '2023-01-25 21:25:33', '2023-01-25 21:25:33');
+INSERT INTO `t_board` (`id`, `name`, `articleCount`, `sort`, `state`, `deleteState`, `createTime`, `updateTime`) VALUES (8, '福利待遇', 0, 8, 0, 0, '2023-01-25 21:25:58', '2023-01-25 21:25:58');
+INSERT INTO `t_board` (`id`, `name`, `articleCount`, `sort`, `state`, `deleteState`, `createTime`, `updateTime`) VALUES (9, '灌溉区', 0, 9, 0, 0, '2023-01-25 21:26:12', '2023-01-25 21:26:12');

@@ -17,7 +17,7 @@ class FroumApplicationTests {
     private UserMapper userMapper;
     @Test
     void contextLoads(){
-        User user = userMapper.selectByPrimaryKey(1l);
+        User user = userMapper.selectByPrimaryKey(1L);
         System.out.println(user.toString());
         System.out.println(user.getUsername());
     }
@@ -31,6 +31,6 @@ class FroumApplicationTests {
     }
     @Test
      public void fucn3(){
-        System.out.println("wandanla");
+        System.out.println("landward");
     }
 }

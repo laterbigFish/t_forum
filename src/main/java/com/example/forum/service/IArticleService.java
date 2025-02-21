@@ -11,7 +11,8 @@ public interface IArticleService {
      * @param article 要发布的帖子
      */
     @Transactional    //这样可以别事务管理起来   如果被重写那么这个事务将会被继承
-    public void create( Article article );
+
+     void create( Article article );
 
     /**
      * 查询Article 与 user 关联的表

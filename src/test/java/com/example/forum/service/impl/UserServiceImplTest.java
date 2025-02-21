@@ -17,7 +17,6 @@ class UserServiceImplTest {
     @Autowired
     private UserServiceImpl userServiceImpl;
 
-    @Transactional //使用这个注解不会污染我们的数据  再测试方法结束之后会进行回滚
    @Test
     void createNormalUser(){
         User user = new User();

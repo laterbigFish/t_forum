@@ -5,8 +5,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-<!--        <version>2.7.3</version>-->
-        <version>3.3.6</version>
+        <version>3.4.0</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.bite</groupId>
@@ -33,31 +32,23 @@
         <springfox-boot-starter.version>3.0.0</springfox-boot-starter.version>
     </properties>
     <dependencies>
-<!--        &lt;!&ndash; API⽂档⽣成，基于swagger2 &ndash;&gt;-->
-<!--        <dependency>-->
-<!--            <groupId>io.springfox</groupId>-->
-<!--            <artifactId>springfox-boot-starter</artifactId>-->
-<!--            <version>${springfox-boot-starter.version}</version>-->
-<!--        </dependency>-->
-<!--        &lt;!&ndash; SpringBoot健康监控 &ndash;&gt;-->
-<!--        <dependency>-->
-<!--            <groupId>org.springframework.boot</groupId>-->
-<!--            <artifactId>spring-boot-starter-actuator</artifactId>-->
-<!--        </dependency>-->
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
+
+
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>8.0.33</version> <!-- 确保使用适当的版本 -->
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>com.mysql</groupId>-->
-<!--            <artifactId>mysql-connector-j</artifactId>-->
-<!--            <scope>runtime</scope>-->
-<!--        </dependency>-->
+        <dependency>
+            <groupId>com.mysql</groupId>
+            <artifactId>mysql-connector-j</artifactId>
+            <scope>runtime</scope>
+        </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
@@ -68,6 +59,7 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+
         <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-spring-boot3-starter</artifactId>
@@ -77,41 +69,42 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-validation</artifactId>
         </dependency>
-        <!--		引入令牌依赖-->
-        <!-- https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt-api -->
-        <dependency>
-            <groupId>io.jsonwebtoken</groupId>
-            <artifactId>jjwt-api</artifactId>
-            <version>0.11.5</version>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt-impl -->
-        <dependency>
-            <groupId>io.jsonwebtoken</groupId>
-            <artifactId>jjwt-impl</artifactId>
-            <version>0.11.5</version>
-            <scope>runtime</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>io.jsonwebtoken</groupId>
-            <artifactId>jjwt-jackson</artifactId> <!-- or jjwt-gson if Gson ispreferred -->
-            <version>0.11.5</version>
-            <scope>runtime</scope>
-        </dependency>
 
         <!-- 编码解码加密⼯具包 md5进行加密 -->
         <dependency>
             <groupId>commons-codec</groupId>
             <artifactId>commons-codec</artifactId>
+            <version>1.17.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.mybatis.spring.boot</groupId>
+            <artifactId>mybatis-spring-boot-starter</artifactId>
+            <version>3.0.4</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.mybatis.spring.boot</groupId>
+            <artifactId>mybatis-spring-boot-starter-test</artifactId>
+            <version>3.0.4</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.mybatis.generator</groupId>
+            <artifactId>mybatis-generator-core</artifactId>
+            <version>1.4.0</version>  <!-- 根据需要选择最新版本 -->
         </dependency>
 
     </dependencies>
     <build>
         <plugins>
             <plugin>
+
                 <groupId>org.mybatis.generator</groupId>
                 <artifactId>mybatis-generator-maven-plugin</artifactId>
                 <version>1.3.6</version>
+
                 <executions>
                     <execution>
                         <id>Generate MyBatis Artifacts</id>
@@ -121,15 +114,18 @@
                         </goals>
                     </execution>
                 </executions>
+
+<!--             使用mybatis的必要流程-->
                 <configuration>
                     <!--generator配置⽂件所在位置-->
                     <configurationFile>src/main/resources/mybatis/generatorConfig.xml</configurationFile>
-                    <!-- 允许覆盖⽣成的⽂件, mapxml不会覆盖, 采⽤追加的⽅式-->
+                    <!-- 允许覆盖⽣成的⽂件, yaml不会覆盖, 采⽤追加的⽅式-->
                     <overwrite>true</overwrite>
                     <verbose>true</verbose>
                     <!--将当前pom的依赖项添加到⽣成器的类路径中-->
                     <includeCompileDependencies>true</includeCompileDependencies>
                 </configuration>
+
                 <dependencies>
                     <dependency>
                         <groupId>mysql</groupId>
@@ -137,6 +133,7 @@
                         <version>8.0.30</version>
                     </dependency>
                 </dependencies>
+
             </plugin>
             <plugin>
                 <groupId>org.springframework.boot</groupId>

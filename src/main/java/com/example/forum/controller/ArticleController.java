@@ -58,7 +58,7 @@ public class ArticleController {
                 article.setTitle(title); //标题
                 article.setContent(content); //正文
                 article.setUserId(user.getId()); //作者id
-                article.setBoardld(boardId);// 板块id
+                article.setBoardId(boardId);// 板块id
                 articleService.create(article);
         //响应成功
         return Result.SUCCESS(ResultCode.SUCCESS);

@@ -3,7 +3,7 @@
 <mapper namespace="com.example.forum.common.dao.ArticleMapper">
   <resultMap id="BaseResultMap" type="com.example.forum.common.model.Article">
     <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="boardld" jdbcType="BIGINT" property="boardld" />
+    <result column="boardId" jdbcType="BIGINT" property="boardId" />
     <result column="userId" jdbcType="BIGINT" property="userId" />
     <result column="title" jdbcType="VARCHAR" property="title" />
     <result column="visitCount" jdbcType="INTEGER" property="visitCount" />
@@ -30,20 +30,21 @@
     content
   </sql>
   <insert id="insert" parameterType="com.example.forum.common.model.Article" useGeneratedKeys="true" keyProperty="id">
-    insert into t_article (id, boardld, userId, 
+    insert into t_article (id, boardId, userId,
       title, visitCount, replyCount, 
       likeCount, state, deleteState, 
       createTime, updateTime, content
       )
-    values (#{id,jdbcType=BIGINT}, #{boardld,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, 
+    values (#{id,jdbcType=BIGINT}, #{boardId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT},
       #{title,jdbcType=VARCHAR}, #{visitCount,jdbcType=INTEGER}, #{replyCount,jdbcType=INTEGER}, 
       #{likeCount,jdbcType=INTEGER}, #{state,jdbcType=TINYINT}, #{deleteState,jdbcType=TINYINT}, 
       #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{content,jdbcType=LONGVARCHAR}
       )
   </insert>
+
   <update id="updateByPrimaryKey" parameterType="com.example.forum.common.model.Article">
     update t_article
-    set boardld = #{boardld,jdbcType=BIGINT},
+    set boardId = #{boardId,jdbcType=BIGINT},
       userId = #{userId,jdbcType=BIGINT},
       title = #{title,jdbcType=VARCHAR},
       visitCount = #{visitCount,jdbcType=INTEGER},
@@ -57,13 +58,13 @@
     where id = #{id,jdbcType=BIGINT}
   </update>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    select id, boardld, userId, title, visitCount, replyCount, likeCount, state, deleteState, 
+    select id, boardId, userId, title, visitCount, replyCount, likeCount, state, deleteState,
     createTime, updateTime, content
     from t_article
     where id = #{id,jdbcType=BIGINT}
   </select>
   <select id="selectAll" resultMap="BaseResultMap">
-    select id, boardld, userId, title, visitCount, replyCount, likeCount, state, deleteState, 
+    select id, boardId, userId, title, visitCount, replyCount, likeCount, state, deleteState,
     createTime, updateTime, content
     from t_article
   </select>

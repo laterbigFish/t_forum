@@ -43,11 +43,11 @@ public class ArticleReplyServiceImpl implements IArticleReplyService {
 
         if(insert!=1) throw new ForumException(Result.FAIL(ResultCode.FAILED));
 
-        Long articleld = articleReply.getArticleId();
+        Long articleId = articleReply.getArticleId();
 
-        if(articleld<=0) throw new ForumException(Result.FAIL(ResultCode.FAILED));
+        if(articleId<=0) throw new ForumException(Result.FAIL(ResultCode.FAILED));
 
-        Article article = articleService.selectByPrimaryKey(articleld);
+        Article article = articleService.selectByPrimaryKey(articleId);
 
         if(article==null) throw new ForumException(Result.FAIL(ResultCode.FAILED_NOT_EXISTS));
 
@@ -55,8 +55,8 @@ public class ArticleReplyServiceImpl implements IArticleReplyService {
 
             throw new ForumException(Result.FAIL(ResultCode.FAILED_FORBIDDEN));
 
-        articleService.addArticleReply(articleld); //帖子的回复数加一
-        log.info("帖子回复成功{}",articleld);
+        articleService.addArticleReply(articleId); //帖子的回复数加一
+        log.info("帖子回复成功{}",articleId);
 
     }
 

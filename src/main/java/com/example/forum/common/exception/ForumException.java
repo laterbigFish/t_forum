@@ -8,6 +8,7 @@ public class ForumException extends RuntimeException{
     //在异常中保存错误信息
 //    private static final long serialVersionUID = -3533806916645793660L;
     // ⾃定义错误
+
     protected Result errorResult;
     // 指定状态码，异常描述
     public ForumException(Result errorResult) {

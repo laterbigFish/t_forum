@@ -95,7 +95,7 @@ public class UserServiceImpl implements IUserService {
     @Override
     public User selectById( Long id ){
 
-        if(id==null){
+        if(id==null || id<=0){
             throw new ForumException(Result.FAIL(ResultCode.FAILED));
         }
         User user = userMapper.selectByPrimaryKey(id);
@@ -197,7 +197,7 @@ public class UserServiceImpl implements IUserService {
             flag = true;
         }
        if(!StringUtils.isEmpty(user.getPhoneNum()) && !user.getPhoneNum().equals(user1.getPhoneNum())){
-           user1.setPassword(user.getPhoneNum());
+           user1.setPhoneNum(user.getPhoneNum());
            flag = true;
        }
        if(!StringUtils.isEmpty(user.getRemark()) && !user.getRemark().equals(user1.getRemark())){
@@ -216,6 +216,7 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     public void modifyPwd( Long id, String password, String newPassword ){
+
         if(password==null || newPassword==null ||  id==null || id<=0){
             throw new ForumException(Result.FAIL(ResultCode.FAILED));
         }

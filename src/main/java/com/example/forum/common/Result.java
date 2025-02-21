@@ -18,7 +18,7 @@ public class Result<T> {
     private T data;
 
     //三种构造方法
-    public Result(){};
+    public Result(){}
 
     public Result(long code,String message){
       this(code,message,null);
@@ -41,11 +41,7 @@ public class Result<T> {
         return new Result<>(ResultCode.SUCCESS.getCode(),message,date);
     }
 
-    /**
-     *  失败
-     * @return
-     * @param <T>
-     */
+
     public static <T> Result<T> FAIL(){
         return new Result<>(ResultCode.FAILED.getCode(),ResultCode.FAILED.getMessage());
     }

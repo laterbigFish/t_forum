@@ -5,7 +5,7 @@ import java.util.Date;
 public class Article {
     private Long id;
 
-    private Long boardld;
+    private Long boardId;
 
     private Long userId;
 
@@ -29,7 +29,10 @@ public class Article {
 
     //判断是否是用户本人
     private Boolean Own;
+    //添加一个关联对象
+    private User user;
 
+    private Board board;
     public Boolean getOwn(){
         return Own;
     }
@@ -38,10 +41,14 @@ public class Article {
         Own = own;
     }
 
-    //添加一个关联对象
-    private User user;
+    public Long getBoardId(){
+        return boardId;
+    }
 
-    private Board board;
+    public void setBoardId( Long boardId ){
+        this.boardId = boardId;
+    }
+
 
     public Board getBoard(){
         return board;
@@ -59,24 +66,6 @@ public class Article {
         this.user = user;
     }
 
-    @Override
-    public String toString(){
-        return "Article{" +
-                "id=" + id +
-                ", boardld=" + boardld +
-                ", userId=" + userId +
-                ", title='" + title + '\'' +
-                ", visitCount=" + visitCount +
-                ", replyCount=" + replyCount +
-                ", likeCount=" + likeCount +
-                ", state=" + state +
-                ", deleteState=" + deleteState +
-                ", createTime=" + createTime +
-                ", updateTime=" + updateTime +
-                ", content='" + content + '\'' +
-                ", user=" + user +
-                '}';
-    }
 
     public Long getId() {
         return id;
@@ -86,13 +75,6 @@ public class Article {
         this.id = id;
     }
 
-    public Long getBoardld() {
-        return boardld;
-    }
-
-    public void setBoardld(Long boardld) {
-        this.boardld = boardld;
-    }
 
     public Long getUserId() {
         return userId;

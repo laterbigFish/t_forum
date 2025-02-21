@@ -56,7 +56,6 @@ public class UserController {
 
         return Result.SUCCESS();
     }
-
     /**
      *   用户登录
      * @param username  用户名

@@ -23,10 +23,8 @@ import java.util.List;
 public class BoardController {
     @Value("${forum.index.board-num:9}")
     private Integer indexBoardNum;
-    /**
-     * 查询首页板块列表
-     * @return
-     */
+
+
     @Resource
     private IBoardService iBoardService;
     @GetMapping("/topList")

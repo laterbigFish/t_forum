@@ -13,7 +13,6 @@ import com.example.forum.service.IUserService;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
@@ -23,26 +22,25 @@ import java.util.List;
 @Slf4j
 @Service
 public class ArticleServiceImpl implements IArticleService {
-
     @Resource
-    private ArticleMapper articleMapper;  //使用这种方式 要小心 不能进行循环引用
+    private ArticleMapper articleMapper;
     @Resource
     private IBoardService iBoardService;
     @Resource
     private IUserService iUserService;
 
-    @Transactional
-
     @Override
-    public void create( Article article ){ //此处article.getId()并不需要进行判断
+    public void create( Article article ){
+
         if(article==null ||
                 !StringUtils.hasLength(article.getContent()) ||
                 !StringUtils.hasLength(article.getTitle())||
-                article.getBoardld()==null||
+                article.getBoardId()==null||
                 article.getUserId()==null){
                 log.warn("参数校验失败喽{}",ResultCode.FAILED_PARAMS_VALIDATE.toString());
             throw new ForumException(Result.FAIL(ResultCode.FAILED_PARAMS_VALIDATE));
         }
+
         article.setVisitCount(0);
         article.setReplyCount(0);
         article.setLikeCount(0);
@@ -57,28 +55,27 @@ public class ArticleServiceImpl implements IArticleService {
         if(insert<=0) throw new ForumException(Result.FAIL(ResultCode.FAILED));
 
         //更新用户发帖数
-        User user = iUserService.selectById(article.getId()); //获取发布该文章的用户的信息
+        User user = iUserService.selectById(article.getUserId()); //获取发布该文章的用户的信息
         if(user==null){
-            log.warn("发帖失败{}", ResultCode.FAILED.toString());
+            log.warn("发帖失败{}", ResultCode.FAILED);
             throw new ForumException(Result.FAIL(ResultCode.FAILED));
         }
         iUserService.addOneArticleCountById(article.getUserId());
 
-        Board board = iBoardService.selectByPrimaryKey(article.getBoardld());
+        Board board = iBoardService.selectByPrimaryKey(article.getBoardId());
 
         if(board==null){
             log.warn("该板块不存在{}",ResultCode.FAILED_NOT_EXISTS);
             throw new ForumException(Result.FAIL(ResultCode.FAILED_CREATE));
         }
-        iBoardService.addOneArticleCountById(article.getBoardld());
-        log.info ("{}发送帖子成功", ResultCode.SUCCESS.toString());
+        iBoardService.addOneArticleCountById(article.getBoardId());
+        log.info ("{}发送帖子成功", ResultCode.SUCCESS);
     }
 
     @Override
     public List<Article> selectAllByUser(){
         //结果是谁用谁校验
-        List<Article> articles = articleMapper.selectAllByUser();
-        return articles;
+        return articleMapper.selectAllByUser();
     }
 
     @Override
@@ -145,7 +142,6 @@ public class ArticleServiceImpl implements IArticleService {
         if(i!=1) throw new ForumException(Result.FAIL(ResultCode.FAILED));
 
     }
-
     @Override
     public Article selectByPrimaryKey( Long id ){
         if(id==null || id<=0) throw new ForumException(Result.FAIL(ResultCode.FAILED_PARAMS_VALIDATE));
@@ -195,11 +191,11 @@ public class ArticleServiceImpl implements IArticleService {
         int i = articleMapper.updateByPrimaryKey(article);
 
         if(i!=1) throw  new ForumException(Result.FAIL(ResultCode.FAILED));
-        Board board = iBoardService.selectByPrimaryKey(article.getBoardld());
+        Board board = iBoardService.selectByPrimaryKey(article.getBoardId());
 
         if(board==null)  throw new ForumException(Result.FAIL(ResultCode.FAILED));
         //随后进行 板块 和用户的操作
-        iBoardService.subtractArticleCountById(article.getBoardld());
+        iBoardService.subtractArticleCountById(article.getBoardId());
 
         User user = iUserService.selectById(article.getUserId());
 
@@ -247,9 +243,8 @@ public class ArticleServiceImpl implements IArticleService {
             throw new ForumException(Result.FAIL(ResultCode.FAILED_USER_NOT_EXISTS));
         }
         //查询文章
-        List<Article> articles = articleMapper.selectByUserId(user.getId());
 
-        return articles;
+        return articleMapper.selectByUserId(user.getId());
     }
 
 }

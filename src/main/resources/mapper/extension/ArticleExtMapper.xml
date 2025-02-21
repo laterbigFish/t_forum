@@ -19,7 +19,7 @@
             u.avatarUrl as u_avatarUrl,
             u.nickname as u_nickname,
             a.id,
-            a.boardld,
+            a.boardId,
             a.userId,
             a.title,
             a.visitCount,
@@ -39,7 +39,7 @@
             u.avatarUrl as u_avatarUrl,
             u.nickname as u_nickname,
             a.id,
-            a.boardld,
+            a.boardId,
             a.userId,
             a.title,
             a.visitCount,
@@ -49,7 +49,7 @@
             a.createTime,
             a.updateTime
         from t_article a,t_user u
-        where a.userId = u.id AND a.deleteState = 0 AND a.boardld = #{boardId}
+        where a.userId = u.id AND a.deleteState = 0 AND a.boardId = #{boardId}
         ORDER BY a.createTime DESC;
     </select>
     <select id="selectDetailById" resultMap="AllInfoResultMap" parameterType="java.lang.Long">
@@ -66,7 +66,7 @@
             b.name as b_name,
             b.deleteState as b_deleteState,
             a.id,
-            a.boardld,
+            a.boardId,
             a.userId,
             a.title,
             a.content,
@@ -77,7 +77,7 @@
             a.createTime,
             a.updateTime
         from t_article a,t_user u ,t_board b
-        where a.userId = u.id AND a.deleteState = 0 AND a.id = #{id} AND a.boardld = b.id;
+        where a.userId = u.id AND a.deleteState = 0 AND a.id = #{id} AND a.boardId = b.id;
     </select>
 <!--    根据用户id查询帖子-->
     <select id="selectByUserId" resultMap="AllInfoResultMap" parameterType="java.lang.Long">
@@ -85,7 +85,7 @@
             b.id as b_id,
             b.name as b_name,
             a.id,
-            a.boardld,
+            a.boardId,
             a.userId,
             a.title,
             a.content,
@@ -95,7 +95,7 @@
             a.state,
             a.createTime,
             a.updateTime
-        FROM t_article a,t_board b WHERE a.boardld=b.id AND a.deleteState=0 AND a.userId= #{userId}
+        FROM t_article a,t_board b WHERE a.boardId=b.id AND a.deleteState=0 AND a.userId= #{userId}
         ORDER BY a.createTime DESC
     </select>
 </mapper>

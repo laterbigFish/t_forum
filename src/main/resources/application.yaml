@@ -11,7 +11,7 @@ spring:
   datasource:
    url: jdbc:mysql://127.0.0.1:3306/forum_db?characterEncoding=utf8&useSSL=false
    username: root
-   password: BITE@yyds.666
+   password: '219161'
     #   password: BITE@yyds.666
    #数据库驱动
    driver-class-name: com.mysql.cj.jdbc.Driver
